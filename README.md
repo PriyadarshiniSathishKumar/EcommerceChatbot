@@ -42,4 +42,91 @@ An intelligent, interactive sales chatbot that transforms the shopping experienc
 - **Voice Input Ready**: Infrastructure for future voice features
 
 ## 🏗️ Architecture
+Frontend (HTML + TailwindCSS + JavaScript)
+         |
+         | REST API Calls (AJAX)
+         ↓
+Backend (Python Flask)
+         |
+         | SQL Queries
+         ↓
+Database (SQLite) — Mock Inventory (100+ products)
+Modular MVC Structure
+
+RESTful API Endpoints for search, cart, authentication
+
+Session Management to preserve user state
+
+Secure Password Hashing for user data protection
+
+💻 Tech Stack
+Layer	Technology
+Frontend	HTML5, TailwindCSS, Vanilla JS
+Backend	Python Flask
+Database	SQLite
+Authentication	Flask-Login, Werkzeug Security
+Animations	AOS (Animate On Scroll), Custom CSS
+Deployment	Replit
+
+🚀 Getting Started
+1️⃣ Clone the Repository
+bash
+Copy
+Edit
+git clone https://github.com/your-username/shopmate-ai.git
+cd shopmate-ai
+2️⃣ Setup Virtual Environment
+bash
+Copy
+Edit
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+pip install -r requirements.txt
+3️⃣ Run the Application
+bash
+Copy
+Edit
+python app.py
+4️⃣ Access the App
+Open your browser and navigate to:
+http://localhost:5000/
+
+📁 Project Structure
+EcommerceChatbot/
+├── static/
+│   ├── css/
+│   └── js/
+├── templates/
+│   └── *.html
+├── database/
+│   └── shopmate.db
+├── app.py
+├── requirements.txt
+└── README.md
+📝 Documentation
+📃 API Endpoints: /login, /register, /search, /cart, /logout
+
+🗂️ Mock Data Generation: Python script provided for auto-generating mock products
+
+📚 Detailed Setup Instructions in README.md
+
+⚙️ Challenges Faced
+Challenge	Solution Implemented
+Maintaining Chat Context	Used session variables and localStorage for tracking
+Real-time Feedback (Typing)	Implemented simulated typing indicators in JS
+Responsive UI across devices	TailwindCSS + thorough mobile-first testing
+Authentication Security	Used Werkzeug for password hashing
+
+🎯 Future Enhancements
+🗣 Voice Input Integration (SpeechRecognition API)
+
+🤖 Advanced NLP with transformers for better product recommendations
+
+🏦 Payment Gateway Integration for end-to-end shopping
+
+📱 PWA Support for installable mobile experience
+
+💬 AI-powered Chat Summaries and Product Comparisons
+
+👨‍💻 Developed with ❤️ by Priyadarshini Sathishkumar
 
