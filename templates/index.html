@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShopMate AI - Your Intelligent Shopping Assistant</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body class="bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-xl backdrop-blur-sm bg-opacity-90 fixed w-full z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <i class="fas fa-robot text-3xl text-indigo-600"></i>
+                        <span class="ml-2 text-xl font-bold text-gray-900">ShopMate AI</span>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <a href="{{ url_for('login') }}" class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg transition duration-300 transform hover:scale-105">
+                        Get Started
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="pt-20 pb-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center" data-aos="fade-up">
+                <h1 class="text-5xl md:text-6xl font-bold text-gray-900 mb-6">
+                    Meet Your AI
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600">
+                        Shopping Assistant
+                    </span>
+                </h1>
+                <p class="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
+                    ShopMate AI transforms your shopping experience with intelligent product recommendations, 
+                    natural conversation, and seamless purchase guidance. Shop smarter, not harder.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="{{ url_for('login') }}" class="bg-indigo-600 hover:bg-indigo-700 text-white px-8 py-4 rounded-xl text-lg font-semibold transition duration-300 transform hover:scale-105 shadow-lg">
+                        <i class="fas fa-comments mr-2"></i>
+                        Start Chatting
+                    </a>
+                    <a href="#features" class="bg-white hover:bg-gray-50 text-indigo-600 px-8 py-4 rounded-xl text-lg font-semibold transition duration-300 border-2 border-indigo-600 hover:shadow-lg">
+                        <i class="fas fa-info-circle mr-2"></i>
+                        Learn More
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">Why Choose ShopMate AI?</h2>
+                <p class="text-xl text-gray-600">Experience the future of online shopping with our intelligent features</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Feature 1 -->
+                <div class="bg-gradient-to-br from-blue-50 to-indigo-100 p-8 rounded-2xl shadow-lg hover:shadow-xl transition duration-300 transform hover:scale-105" data-aos="fade-up" data-aos-delay="100">
+                    <div class="text-indigo-600 mb-4">
+                        <i class="fas fa-brain text-4xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Smart Product Discovery</h3>
+                    <p class="text-gray-600">Our AI understands your preferences and suggests products you'll love based on natural conversation.</p>
+                </div>
+
+                <!-- Feature 2 -->
+                <div class="bg-gradient-to-br from-purple-50 to-pink-100 p-8 rounded-2xl shadow-lg hover:shadow-xl transition duration-300 transform hover:scale-105" data-aos="fade-up" data-aos-delay="200">
+                    <div class="text-purple-600 mb-4">
+                        <i class="fas fa-comments text-4xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Natural Conversation</h3>
+                    <p class="text-gray-600">Chat naturally like you would with a friend. No complex menus or confusing interfaces.</p>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="bg-gradient-to-br from-green-50 to-emerald-100 p-8 rounded-2xl shadow-lg hover:shadow-xl transition duration-300 transform hover:scale-105" data-aos="fade-up" data-aos-delay="300">
+                    <div class="text-green-600 mb-4">
+                        <i class="fas fa-shopping-cart text-4xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Seamless Shopping</h3>
+                    <p class="text-gray-600">Add items to cart, manage your purchases, and checkout - all within the chat interface.</p>
+                </div>
+
+                <!-- Feature 4 -->
+                <div class="bg-gradient-to-br from-yellow-50 to-orange-100 p-8 rounded-2xl shadow-lg hover:shadow-xl transition duration-300 transform hover:scale-105" data-aos="fade-up" data-aos-delay="400">
+                    <div class="text-orange-600 mb-4">
+                        <i class="fas fa-filter text-4xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Smart Filtering</h3>
+                    <p class="text-gray-600">Filter by price, category, ratings, and more with simple conversational commands.</p>
+                </div>
+
+                <!-- Feature 5 -->
+                <div class="bg-gradient-to-br from-red-50 to-pink-100 p-8 rounded-2xl shadow-lg hover:shadow-xl transition duration-300 transform hover:scale-105" data-aos="fade-up" data-aos-delay="500">
+                    <div class="text-red-600 mb-4">
+                        <i class="fas fa-history text-4xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Chat History</h3>
+                    <p class="text-gray-600">Keep track of your conversations and export your chat history anytime.</p>
+                </div>
+
+                <!-- Feature 6 -->
+                <div class="bg-gradient-to-br from-indigo-50 to-blue-100 p-8 rounded-2xl shadow-lg hover:shadow-xl transition duration-300 transform hover:scale-105" data-aos="fade-up" data-aos-delay="600">
+                    <div class="text-blue-600 mb-4">
+                        <i class="fas fa-mobile-alt text-4xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Mobile Optimized</h3>
+                    <p class="text-gray-600">Perfect experience on any device - desktop, tablet, or mobile phone.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Demo Section -->
+    <section class="py-16 bg-gradient-to-br from-indigo-900 to-purple-900 text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="text-4xl font-bold mb-4">See ShopMate AI in Action</h2>
+                <p class="text-xl text-indigo-200">Watch how easy shopping becomes with AI assistance</p>
+            </div>
+            
+            <div class="max-w-4xl mx-auto">
+                <div class="bg-white bg-opacity-10 backdrop-blur-lg rounded-3xl p-8 shadow-2xl" data-aos="fade-up" data-aos-delay="200">
+                    <div class="bg-gray-900 rounded-2xl p-6 font-mono text-sm">
+                        <div class="flex items-center mb-4">
+                            <div class="flex space-x-2">
+                                <div class="w-3 h-3 bg-red-500 rounded-full"></div>
+                                <div class="w-3 h-3 bg-yellow-500 rounded-full"></div>
+                                <div class="w-3 h-3 bg-green-500 rounded-full"></div>
+                            </div>
+                            <span class="ml-4 text-gray-400">ShopMate AI Chat</span>
+                        </div>
+                        
+                        <div class="space-y-4">
+                            <div class="flex items-start space-x-3">
+                                <div class="text-blue-400">You:</div>
+                                <div class="text-gray-300">Hi! I'm looking for wireless headphones under $100</div>
+                            </div>
+                            
+                            <div class="flex items-start space-x-3">
+                                <div class="text-green-400">ShopMate:</div>
+                                <div class="text-gray-300">Great choice! I found 6 wireless headphones under $100. Here are some top picks:
+                                    <br><br>🎧 <strong>Wireless Bluetooth Headphones</strong> - $79.99 ⭐ 4.5/5
+                                    <br>📦 Electronics | [Add to Cart]
+                                    <br><br>Would you like to see more options or filter by specific features?
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start space-x-3">
+                                <div class="text-blue-400">You:</div>
+                                <div class="text-gray-300">Add the first one to my cart</div>
+                            </div>
+                            
+                            <div class="flex items-start space-x-3">
+                                <div class="text-green-400">ShopMate:</div>
+                                <div class="text-gray-300">Perfect! ✅ Wireless Bluetooth Headphones added to your cart.
+                                    <br>Your cart total: $79.99
+                                    <br><br>Anything else you'd like to add?
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center" data-aos="fade-up">
+            <h2 class="text-4xl font-bold text-gray-900 mb-4">Ready to Transform Your Shopping?</h2>
+            <p class="text-xl text-gray-600 mb-8">Join thousands of satisfied customers who've discovered smarter shopping with ShopMate AI</p>
+            <a href="{{ url_for('login') }}" class="bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white px-12 py-4 rounded-xl text-lg font-semibold transition duration-300 transform hover:scale-105 shadow-lg">
+                <i class="fas fa-rocket mr-2"></i>
+                Get Started Free
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <div class="flex items-center justify-center mb-4">
+                    <i class="fas fa-robot text-3xl text-indigo-400"></i>
+                    <span class="ml-2 text-2xl font-bold">ShopMate AI</span>
+                </div>
+                <p class="text-gray-400 mb-4">Your intelligent shopping assistant, powered by AI</p>
+                <div class="flex justify-center space-x-6">
+                    <a href="#" class="text-gray-400 hover:text-white transition duration-300">
+                        <i class="fab fa-twitter text-xl"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition duration-300">
+                        <i class="fab fa-facebook text-xl"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition duration-300">
+                        <i class="fab fa-instagram text-xl"></i>
+                    </a>
+                </div>
+                <div class="mt-8 pt-8 border-t border-gray-800">
+                    <p class="text-gray-400">&copy; 2024 ShopMate AI. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    <script>
+        AOS.init({
+            duration: 800,
+            once: true
+        });
+    </script>
+</body>
+</html>

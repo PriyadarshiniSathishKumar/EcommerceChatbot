@@ -1,0 +1,326 @@
+/* Custom styles for ShopMate AI */
+
+/* Base styles */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    transition: all 0.3s ease;
+}
+
+/* Chat specific styles */
+.message {
+    opacity: 0;
+    animation: fadeInUp 0.4s ease forwards;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Typing animation */
+@keyframes typing {
+    0%, 20% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.5);
+        opacity: 0.7;
+    }
+}
+
+.typing-dot {
+    animation: typing 1.4s infinite ease-in-out;
+}
+
+.typing-dot:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.typing-dot:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+/* Quick action buttons */
+.quick-action-btn {
+    @apply px-3 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 text-sm rounded-full transition-all duration-200 transform hover:scale-105 cursor-pointer;
+}
+
+.quick-action-btn:hover {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Product cards in chat */
+.product-card {
+    @apply bg-white border rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow duration-200;
+}
+
+.product-card img {
+    @apply w-full h-32 object-cover rounded-md mb-3;
+}
+
+.product-card .add-to-cart-btn {
+    @apply w-full bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg transition-colors duration-200 text-sm font-medium;
+}
+
+/* Scrollbar customization */
+#chatMessages::-webkit-scrollbar {
+    width: 6px;
+}
+
+#chatMessages::-webkit-scrollbar-track {
+    background: #f1f5f9;
+    border-radius: 3px;
+}
+
+#chatMessages::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 3px;
+}
+
+#chatMessages::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
+}
+
+/* Dark theme */
+.dark-theme {
+    background-color: #1a202c;
+    color: #e2e8f0;
+}
+
+.dark-theme header {
+    background-color: #2d3748;
+    border-color: #4a5568;
+}
+
+.dark-theme #chatMessages {
+    background-color: #1a202c;
+}
+
+.dark-theme .bg-white {
+    background-color: #2d3748 !important;
+    color: #e2e8f0;
+}
+
+.dark-theme .border {
+    border-color: #4a5568 !important;
+}
+
+.dark-theme .text-gray-700 {
+    color: #e2e8f0 !important;
+}
+
+.dark-theme .text-gray-500 {
+    color: #a0aec0 !important;
+}
+
+.dark-theme .quick-action-btn {
+    background-color: #4a5568;
+    color: #e2e8f0;
+}
+
+.dark-theme .quick-action-btn:hover {
+    background-color: #718096;
+}
+
+/* Loading animation */
+.loading-dots {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.loading-dots span {
+    display: inline-block;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background-color: currentColor;
+    animation: loading-bounce 1.4s infinite ease-in-out both;
+}
+
+.loading-dots span:nth-child(1) {
+    animation-delay: -0.32s;
+}
+
+.loading-dots span:nth-child(2) {
+    animation-delay: -0.16s;
+}
+
+@keyframes loading-bounce {
+    0%, 80%, 100% {
+        transform: scale(0);
+    }
+    40% {
+        transform: scale(1);
+    }
+}
+
+/* Pulse animation for new messages */
+.pulse-animation {
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(99, 102, 241, 0.7);
+    }
+    70% {
+        box-shadow: 0 0 0 10px rgba(99, 102, 241, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(99, 102, 241, 0);
+    }
+}
+
+/* Custom button styles */
+.btn-primary {
+    @apply bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2 px-4 rounded-lg transition-all duration-200 transform hover:scale-105 shadow-lg;
+}
+
+.btn-secondary {
+    @apply bg-gray-200 hover:bg-gray-300 text-gray-800 font-medium py-2 px-4 rounded-lg transition-all duration-200;
+}
+
+.btn-success {
+    @apply bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-4 rounded-lg transition-all duration-200;
+}
+
+.btn-danger {
+    @apply bg-red-600 hover:bg-red-700 text-white font-medium py-2 px-4 rounded-lg transition-all duration-200;
+}
+
+/* Form enhancements */
+.form-input {
+    @apply w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-200;
+}
+
+.form-input:focus {
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+}
+
+/* Alert styles */
+.alert {
+    @apply p-4 rounded-lg border-l-4 mb-4;
+}
+
+.alert-success {
+    @apply bg-green-50 border-green-500 text-green-700;
+}
+
+.alert-error {
+    @apply bg-red-50 border-red-500 text-red-700;
+}
+
+.alert-info {
+    @apply bg-blue-50 border-blue-500 text-blue-700;
+}
+
+.alert-warning {
+    @apply bg-yellow-50 border-yellow-500 text-yellow-700;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .message .max-w-md {
+        max-width: calc(100vw - 4rem);
+    }
+    
+    #sidebar {
+        display: none;
+    }
+    
+    .quick-action-btn {
+        font-size: 0.75rem;
+        padding: 0.5rem 0.75rem;
+    }
+}
+
+/* Product grid in chat */
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin: 1rem 0;
+}
+
+/* Smooth transitions */
+.transition-smooth {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Focus states */
+*:focus {
+    outline: none;
+}
+
+.focus-ring:focus {
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+}
+
+/* Chat message markdown styling */
+.prose {
+    max-width: none;
+}
+
+.prose p {
+    margin-bottom: 0.5rem;
+}
+
+.prose ul {
+    margin: 0.5rem 0;
+    padding-left: 1rem;
+}
+
+.prose li {
+    margin-bottom: 0.25rem;
+}
+
+.prose strong {
+    font-weight: 600;
+}
+
+/* Product links in chat */
+.product-link {
+    @apply text-indigo-600 hover:text-indigo-800 font-medium underline cursor-pointer;
+}
+
+/* Status indicators */
+.status-online {
+    @apply w-3 h-3 bg-green-500 rounded-full;
+}
+
+.status-offline {
+    @apply w-3 h-3 bg-gray-400 rounded-full;
+}
+
+/* Badge styles */
+.badge {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium;
+}
+
+.badge-primary {
+    @apply bg-indigo-100 text-indigo-800;
+}
+
+.badge-success {
+    @apply bg-green-100 text-green-800;
+}
+
+.badge-danger {
+    @apply bg-red-100 text-red-800;
+}
+
+.badge-warning {
+    @apply bg-yellow-100 text-yellow-800;
+}

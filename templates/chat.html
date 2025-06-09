@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat - ShopMate AI</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body class="bg-gray-100 h-screen flex flex-col">
+    <!-- Header -->
+    <header class="bg-white shadow-lg border-b">
+        <div class="flex items-center justify-between px-6 py-4">
+            <!-- Logo and Brand -->
+            <div class="flex items-center space-x-3">
+                <div class="flex items-center justify-center w-10 h-10 bg-indigo-600 rounded-full">
+                    <i class="fas fa-robot text-white"></i>
+                </div>
+                <div>
+                    <h1 class="text-xl font-bold text-gray-900">ShopMate AI</h1>
+                    <p class="text-sm text-gray-500">Your Shopping Assistant</p>
+                </div>
+            </div>
+
+            <!-- User Info and Actions -->
+            <div class="flex items-center space-x-4">
+                <!-- Theme Toggle -->
+                <button id="themeToggle" class="p-2 rounded-lg hover:bg-gray-100 transition-colors">
+                    <i class="fas fa-moon text-gray-600"></i>
+                </button>
+
+                <!-- Cart -->
+                <div class="relative">
+                    <button id="cartBtn" class="p-2 rounded-lg hover:bg-gray-100 transition-colors relative">
+                        <i class="fas fa-shopping-cart text-gray-600 text-lg"></i>
+                        <span id="cartCount" class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">{{ cart_count }}</span>
+                    </button>
+                </div>
+
+                <!-- User Menu -->
+                <div class="relative">
+                    <button id="userMenuBtn" class="flex items-center space-x-2 p-2 rounded-lg hover:bg-gray-100 transition-colors">
+                        <div class="w-8 h-8 bg-indigo-600 rounded-full flex items-center justify-center">
+                            <i class="fas fa-user text-white text-sm"></i>
+                        </div>
+                        <span class="text-gray-700 font-medium">{{ session.username }}</span>
+                        <i class="fas fa-chevron-down text-gray-400 text-sm"></i>
+                    </button>
+                    
+                    <!-- Dropdown Menu -->
+                    <div id="userMenu" class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border hidden z-50">
+                        <div class="py-2">
+                            <button id="exportChatBtn" class="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                                <i class="fas fa-download mr-3"></i>
+                                Export Chat
+                            </button>
+                            <button id="clearChatBtn" class="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                                <i class="fas fa-trash mr-3"></i>
+                                Clear Chat
+                            </button>
+                            <div class="border-t my-1"></div>
+                            <a href="{{ url_for('logout') }}" class="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                                <i class="fas fa-sign-out-alt mr-3"></i>
+                                Logout
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Chat Container -->
+    <div class="flex-1 flex overflow-hidden">
+        <!-- Main Chat Area -->
+        <div class="flex-1 flex flex-col">
+            <!-- Chat Messages -->
+            <div id="chatMessages" class="flex-1 overflow-y-auto p-6 space-y-4">
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="message {{ 'user-message' if message.sender == 'user' else 'bot-message' }}">
+                            {% if message.sender == 'user' %}
+                                <div class="flex justify-end">
+                                    <div class="bg-indigo-600 text-white rounded-2xl rounded-tr-sm px-4 py-3 max-w-md shadow-lg">
+                                        <p class="whitespace-pre-wrap">{{ message.message }}</p>
+                                        <div class="text-xs text-indigo-200 mt-1">
+                                            {{ message.timestamp.strftime('%H:%M') }}
+                                        </div>
+                                    </div>
+                                    <div class="w-8 h-8 bg-indigo-600 rounded-full flex items-center justify-center ml-3 flex-shrink-0">
+                                        <i class="fas fa-user text-white text-sm"></i>
+                                    </div>
+                                </div>
+                            {% else %}
+                                <div class="flex">
+                                    <div class="w-8 h-8 bg-gray-600 rounded-full flex items-center justify-center mr-3 flex-shrink-0">
+                                        <i class="fas fa-robot text-white text-sm"></i>
+                                    </div>
+                                    <div class="bg-white rounded-2xl rounded-tl-sm px-4 py-3 max-w-md shadow-lg border">
+                                        <div class="prose prose-sm max-w-none">
+                                            {{ message.message | replace('\n', '<br>') | safe }}
+                                        </div>
+                                        <div class="text-xs text-gray-500 mt-1">
+                                            {{ message.timestamp.strftime('%H:%M') }}
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endif %}
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <!-- Welcome Message -->
+                    <div class="message bot-message">
+                        <div class="flex">
+                            <div class="w-8 h-8 bg-gray-600 rounded-full flex items-center justify-center mr-3 flex-shrink-0">
+                                <i class="fas fa-robot text-white text-sm"></i>
+                            </div>
+                            <div class="bg-white rounded-2xl rounded-tl-sm px-4 py-3 max-w-md shadow-lg border">
+                                <div class="prose prose-sm max-w-none">
+                                    <p>👋 <strong>Hello {{ session.username }}!</strong></p>
+                                    <p>Welcome to ShopMate AI! I'm here to help you find amazing products.</p>
+                                    <p>You can try:</p>
+                                    <ul class="text-sm">
+                                        <li>• "Show me electronics"</li>
+                                        <li>• "Find books under $30"</li>
+                                        <li>• "Search for headphones"</li>
+                                        <li>• "Show my cart"</li>
+                                    </ul>
+                                    <p>What are you looking for today? 🛍️</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+
+                <!-- Typing Indicator -->
+                <div id="typingIndicator" class="message bot-message hidden">
+                    <div class="flex">
+                        <div class="w-8 h-8 bg-gray-600 rounded-full flex items-center justify-center mr-3 flex-shrink-0">
+                            <i class="fas fa-robot text-white text-sm"></i>
+                        </div>
+                        <div class="bg-white rounded-2xl rounded-tl-sm px-4 py-3 shadow-lg border">
+                            <div class="flex space-x-1">
+                                <div class="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
+                                <div class="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style="animation-delay: 0.1s"></div>
+                                <div class="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style="animation-delay: 0.2s"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Message Input -->
+            <div class="bg-white border-t p-4">
+                <form id="messageForm" class="flex space-x-3">
+                    <div class="flex-1 relative">
+                        <input type="text" id="messageInput" 
+                               placeholder="Type your message... (e.g., 'Show me electronics under $100')"
+                               class="w-full px-4 py-3 border border-gray-300 rounded-2xl focus:ring-2 focus:ring-indigo-500 focus:border-transparent pr-12 transition-all duration-200"
+                               autocomplete="off">
+                        <button type="button" id="voiceBtn" class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-indigo-600 transition-colors">
+                            <i class="fas fa-microphone"></i>
+                        </button>
+                    </div>
+                    <button type="submit" id="sendBtn" 
+                            class="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-3 rounded-2xl transition-all duration-200 transform hover:scale-105 shadow-lg disabled:opacity-50 disabled:cursor-not-allowed">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </form>
+
+                <!-- Quick Actions -->
+                <div class="flex flex-wrap gap-2 mt-3">
+                    <button class="quick-action-btn" data-message="Show me electronics">
+                        📱 Electronics
+                    </button>
+                    <button class="quick-action-btn" data-message="Find books">
+                        📚 Books
+                    </button>
+                    <button class="quick-action-btn" data-message="Show textiles">
+                        👔 Textiles
+                    </button>
+                    <button class="quick-action-btn" data-message="Show my cart">
+                        🛒 My Cart
+                    </button>
+                    <button class="quick-action-btn" data-message="Help">
+                        ❓ Help
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sidebar (Optional - for product showcase) -->
+        <div id="sidebar" class="w-80 bg-white border-l hidden lg:block">
+            <div class="p-4 border-b">
+                <h3 class="font-semibold text-gray-900">Featured Products</h3>
+            </div>
+            <div id="featuredProducts" class="p-4 space-y-4">
+                <!-- Featured products will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="{{ url_for('static', filename='js/chat.js') }}"></script>
+    <script>
+        // Initialize chat functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeChat();
+        });
+
+        // Quick action buttons
+        document.querySelectorAll('.quick-action-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const message = this.dataset.message;
+                document.getElementById('messageInput').value = message;
+                document.getElementById('messageForm').dispatchEvent(new Event('submit'));
+            });
+        });
+
+        // User menu toggle
+        document.getElementById('userMenuBtn').addEventListener('click', function() {
+            document.getElementById('userMenu').classList.toggle('hidden');
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', function(e) {
+            const menu = document.getElementById('userMenu');
+            const btn = document.getElementById('userMenuBtn');
+            if (!menu.contains(e.target) && !btn.contains(e.target)) {
+                menu.classList.add('hidden');
+            }
+        });
+
+        // Theme toggle
+        document.getElementById('themeToggle').addEventListener('click', function() {
+            document.body.classList.toggle('dark-theme');
+            const icon = this.querySelector('i');
+            if (document.body.classList.contains('dark-theme')) {
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+            } else {
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
+            }
+        });
+
+        // Export chat functionality
+        document.getElementById('exportChatBtn').addEventListener('click', function() {
+            exportChatHistory();
+        });
+
+        // Clear chat functionality
+        document.getElementById('clearChatBtn').addEventListener('click', function() {
+            if (confirm('Are you sure you want to clear the chat history?')) {
+                clearChatHistory();
+            }
+        });
+    </script>
+</body>
+</html>
